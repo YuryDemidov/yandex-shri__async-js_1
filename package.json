@@ -1,0 +1,19 @@
+{
+  "name": "shri-02-async-js",
+  "version": "1.0.0",
+  "description": "Homework for Yandex frontend school. Part 2. Asynchronous JS.",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc --build",
+    "test": "mocha ./**/*.test.js",
+    "test:watch": "npm run compile && mocha ./**/*.test.js --watch"
+  },
+  "author": "Iurii Demidov",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.12.2",
+    "mocha": "^9.0.0",
+    "typescript": "^4.3.2"
+  }
+}
