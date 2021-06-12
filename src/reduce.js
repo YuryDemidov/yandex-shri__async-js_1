@@ -41,6 +41,7 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
+import './shri-async-hw.js';
 var _a = globalThis.Homework, add = _a.add, subtract = _a.subtract, lessOrEqual = _a.lessOrEqual;
 export default function reduce(array, fn, initialValue, cb) {
     var _this = this;
@@ -60,45 +61,47 @@ export default function reduce(array, fn, initialValue, cb) {
                 case 2:
                     arrayLastIndex = _b.sent();
                     accumulator = initialValue;
-                    array[Symbol.asyncIterator] = function () {
-                        return {
-                            current: 0,
-                            last: arrayLastIndex,
-                            next: function () {
-                                return __awaiter(this, void 0, void 0, function () {
-                                    var currentValue, isNotDone, value, _a;
-                                    var _this = this;
-                                    return __generator(this, function (_b) {
-                                        switch (_b.label) {
-                                            case 0: return [4, new Promise(function (resolve) { return array.get(_this.current, function (result) { return resolve(result); }); })];
-                                            case 1:
-                                                currentValue = _b.sent();
-                                                return [4, new Promise(function (resolve) { return lessOrEqual(_this.current, _this.last, function (result) { return resolve(result); }); })];
-                                            case 2:
-                                                isNotDone = _b.sent();
-                                                if (!isNotDone) return [3, 4];
-                                                value = {
-                                                    value: currentValue,
-                                                    index: this.current
-                                                };
-                                                _a = this;
-                                                return [4, new Promise(function (resolve) { return add(_this.current, 1, function (result) { return resolve(result); }); })];
-                                            case 3:
-                                                _a.current = _b.sent();
-                                                return [2, {
-                                                        done: false,
-                                                        value: value
+                    if (!array[Symbol.asyncIterator]) {
+                        array[Symbol.asyncIterator] = function () {
+                            return {
+                                current: 0,
+                                last: arrayLastIndex,
+                                next: function () {
+                                    return __awaiter(this, void 0, void 0, function () {
+                                        var currentValue, isNotDone, value, _a;
+                                        var _this = this;
+                                        return __generator(this, function (_b) {
+                                            switch (_b.label) {
+                                                case 0: return [4, new Promise(function (resolve) { return array.get(_this.current, function (result) { return resolve(result); }); })];
+                                                case 1:
+                                                    currentValue = _b.sent();
+                                                    return [4, new Promise(function (resolve) { return lessOrEqual(_this.current, _this.last, function (result) { return resolve(result); }); })];
+                                                case 2:
+                                                    isNotDone = _b.sent();
+                                                    if (!isNotDone) return [3, 4];
+                                                    value = {
+                                                        value: currentValue,
+                                                        index: this.current
+                                                    };
+                                                    _a = this;
+                                                    return [4, new Promise(function (resolve) { return add(_this.current, 1, function (result) { return resolve(result); }); })];
+                                                case 3:
+                                                    _a.current = _b.sent();
+                                                    return [2, {
+                                                            done: false,
+                                                            value: value
+                                                        }];
+                                                case 4: return [2, {
+                                                        done: true,
+                                                        value: undefined
                                                     }];
-                                            case 4: return [2, {
-                                                    done: true,
-                                                    value: undefined
-                                                }];
-                                        }
+                                            }
+                                        });
                                     });
-                                });
-                            }
+                                }
+                            };
                         };
-                    };
+                    }
                     _b.label = 3;
                 case 3:
                     _b.trys.push([3, 8, 9, 14]);

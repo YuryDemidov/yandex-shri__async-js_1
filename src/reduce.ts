@@ -1,3 +1,5 @@
+import './shri-async-hw.js';
+
 interface AddFunc {
   (a: Number, b: Number, cb: (result: Number) => void): void;
 }
@@ -46,39 +48,43 @@ export default function reduce(
     });
     let accumulator = initialValue;
 
-    array[Symbol.asyncIterator] = () => {
-      return {
-        current: 0,
-        last: arrayLastIndex,
+    if (!array[Symbol.asyncIterator]) {
+      array[Symbol.asyncIterator] = () => {
+        return {
+          current: 0,
+          last: arrayLastIndex,
 
-        async next() {
-          const currentValue = await new Promise(resolve => array.get(this.current, result => resolve(result)));
-          const isNotDone = await new Promise(resolve => lessOrEqual(this.current, this.last, result => resolve(result)));
+          async next() {
+            const currentValue = await new Promise(resolve => array.get(this.current, result => resolve(result)));
+            const isNotDone = await new Promise(resolve => lessOrEqual(this.current, this.last, result => resolve(result)));
 
-          if (isNotDone) {
-            const value: AsyncArrayIteratorResult = {
-              value: currentValue,
-              index: this.current
-            };
-            this.current = await new Promise(resolve => add(this.current, 1, result => resolve(result)));
-            return {
-              done: false,
-              value
-            };
-          } else {
-            return {
-              done: true,
-              value: undefined
-            };
+            if (isNotDone) {
+              const value: AsyncArrayIteratorResult = {
+                value: currentValue,
+                index: this.current
+              };
+              this.current = await new Promise(resolve => add(this.current, 1, result => resolve(result)));
+              return {
+                done: false,
+                value
+              };
+            } else {
+              return {
+                done: true,
+                value: undefined
+              };
+            }
           }
-        }
-      };
+        };
+      }
     }
 
     for await (let item of array) {
-      accumulator = fn(accumulator, item.value, item.index, array)
+      accumulator = fn(accumulator, item.value, item.index, array);
     }
+
     cb(accumulator);
-    return accumulator
+
+    return accumulator;
   })();
 }
