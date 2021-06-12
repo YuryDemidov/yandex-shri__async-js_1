@@ -5,15 +5,23 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc --build",
-    "test": "mocha ./**/*.test.js",
-    "test:watch": "npm run compile && mocha ./**/*.test.js --watch"
+    "test:mocha": "mocha ./**/*.test.js",
+    "test:browser": "node server.js"
   },
   "author": "Iurii Demidov",
   "license": "MIT",
   "devDependencies": {
     "@types/mocha": "^8.2.2",
     "@types/node": "^15.12.2",
+    "chai": "^4.3.4",
     "mocha": "^9.0.0",
     "typescript": "^4.3.2"
+  },
+  "type": "module",
+  "engines": {
+    "node": "16.3.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
