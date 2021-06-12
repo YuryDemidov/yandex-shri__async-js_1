@@ -9,10 +9,9 @@
             "dom",
             "es5",
             "scripthost",
-            "es2018.asynciterable"
+            "es2018.asynciterable",
+            "ES2020.Promise",
+            "ESNext"
         ]
-    },
-    "files": [
-        "src/reduce.ts"
-    ]
+    }
 }

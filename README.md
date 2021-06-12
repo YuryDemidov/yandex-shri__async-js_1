@@ -20,9 +20,15 @@
     npm run test:browser
 ```
 
+---
+
 Страница с тестами на Github Pages:
 
 [index.html](https://yurydemidov.github.io/yandex-shri__async-js_1/src/index.html)
+
+Бонусное задание и тесты к нему:
+
+`/src/promises`
 
 ---
 
