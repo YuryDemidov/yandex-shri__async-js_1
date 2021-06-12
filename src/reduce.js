@@ -72,10 +72,14 @@ export default function reduce(array, fn, initialValue, cb) {
                                         var _this = this;
                                         return __generator(this, function (_b) {
                                             switch (_b.label) {
-                                                case 0: return [4, new Promise(function (resolve) { return array.get(_this.current, function (result) { return resolve(result); }); })];
+                                                case 0: return [4, new Promise(function (resolve) {
+                                                        array.get(_this.current, function (result) { return resolve(result); });
+                                                    })];
                                                 case 1:
                                                     currentValue = _b.sent();
-                                                    return [4, new Promise(function (resolve) { return lessOrEqual(_this.current, _this.last, function (result) { return resolve(result); }); })];
+                                                    return [4, new Promise(function (resolve) {
+                                                            lessOrEqual(_this.current, _this.last, function (result) { return resolve(result); });
+                                                        })];
                                                 case 2:
                                                     isNotDone = _b.sent();
                                                     if (!isNotDone) return [3, 4];

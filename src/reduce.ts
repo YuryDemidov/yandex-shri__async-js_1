@@ -1,26 +1,26 @@
 import './shri-async-hw.js';
 
 interface AddFunc {
-  (a: Number, b: Number, cb: (result: Number) => void): void;
+  (a: number, b: number, cb: (result: number) => void): void;
 }
 interface SubtractFunc {
-  (a: Number, b: Number, cb: (result: Number) => void): void;
+  (a: number, b: number, cb: (result: number) => void): void;
 }
 interface lessOrEqualFunc {
-  (a: any, b: any, cb: (result: Boolean) => void): void;
+  (a: any, b: any, cb: (result: boolean) => void): void;
 }
 interface AsyncArray {
-  set(index: Number, value: any, cb: () => void): void;
+  set(index: number, value: any, cb: () => void): void;
   push(value: any, cb: () => void): void;
-  get(index: Number, cb: (result: any) => void): void;
+  get(index: number, cb: (result: any) => void): void;
   pop(cb: (result: any) => void): void;
-  length(cb: (result: Number) => void): void;
+  length(cb: (result: number) => void): void;
   print(): void,
   [Symbol.asyncIterator](): AsyncIterator<AsyncArrayIteratorResult>
 }
 interface AsyncArrayIteratorResult {
   value: any,
-  index: Number
+  index: number
 }
 
 const {
@@ -36,14 +36,14 @@ const {
 
 export default function reduce(
   array: AsyncArray,
-  fn: (acc: any, cur: any, idx: Number, src: AsyncArray) => any,
+  fn: (acc: any, cur: any, idx: number, src: AsyncArray) => any,
   initialValue: any,
   cb: (result: any) => void) {
   (async () => {
-    const arrayLength: Number = await new Promise(resolve => {
+    const arrayLength: number = await new Promise(resolve => {
       array.length(result => resolve(result))
     });
-    const arrayLastIndex: Number = await new Promise(resolve => {
+    const arrayLastIndex: number = await new Promise(resolve => {
       subtract(arrayLength, 1, result => resolve(result))
     });
     let accumulator = initialValue;
@@ -55,8 +55,12 @@ export default function reduce(
           last: arrayLastIndex,
 
           async next() {
-            const currentValue = await new Promise(resolve => array.get(this.current, result => resolve(result)));
-            const isNotDone = await new Promise(resolve => lessOrEqual(this.current, this.last, result => resolve(result)));
+            const currentValue = await new Promise(resolve => {
+              array.get(this.current, result => resolve(result));
+            });
+            const isNotDone = await new Promise(resolve => {
+              lessOrEqual(this.current, this.last, result => resolve(result));
+            });
 
             if (isNotDone) {
               const value: AsyncArrayIteratorResult = {
