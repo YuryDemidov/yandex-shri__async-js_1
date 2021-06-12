@@ -20,6 +20,10 @@
     npm run test:browser
 ```
 
+Страница с тестами на Github Pages:
+
+[index.html](https://yurydemidov.github.io/yandex-shri__async-js_1/src/index.html)
+
 Вам дан асинхронный API, реализующий арифметические действия, операции сравнения и операции над элементами массива. Каждый метод API последним аргументом принимает callback, который будет вызван после окончания асинхронного действия. В файле [example.html](example.html) можно посмотреть примеры использования.
 
 - [код асинхронного API](https://github.com/dima117/shri-async-hw/blob/master/shri-async-hw.js)

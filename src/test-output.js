@@ -59,6 +59,6 @@ reduce(
   }
 );
 
-fetch('/test-output.js')
+fetch('test-output.js')
   .then(response => response.text())
   .then(data => document.querySelector('#output').textContent = data);
